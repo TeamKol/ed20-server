@@ -42,7 +42,7 @@ module.exports = function(passport) {
         console.log(email);
         // asynchronous
         // User.findOne wont fire unless data is sent back
-        db.connection.connection();
+        
         process.nextTick(function() {
 
         // find a user whose email is the same as the forms email
@@ -97,7 +97,7 @@ module.exports = function(passport) {
         
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        db.connection.connection();
+        
         User.findOne({ 'email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
@@ -112,13 +112,10 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
-            req.session.user = user;
-            console.log(user + 'hi');
+            req.session.userId = user._id;
             return done(null, user);
         });
 
     }));
 
 };
-
-

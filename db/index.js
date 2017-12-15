@@ -1,9 +1,10 @@
 'user strict'
-const connection = require('./connection');
 const insert = require('./insert');
-
+const blog = require('./blog');
+const user = require('./user');
 /**
  * exposes all connection funtions here
  */
-module.exports.connection = connection;
 module.exports.insert = insert;
+module.exports.blog = blog;
+module.exports.user = user;

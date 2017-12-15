@@ -8,6 +8,7 @@ const passportLocal = require('passport-local');
 const bodyParser = require('body-parser');
 const path = require('path');
 const flash    = require('connect-flash');
+const mongoose = require('mongoose');
 const app = express();
 
 /**
@@ -18,6 +19,9 @@ app.engine('hbs', hbs({extname: '.hbs',defaultLayout: 'layout', layoutsDir: __di
 app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'hbs');
 
+
+mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true/* other options */});
+console.log(mongoose.connection.readyState);
 /**
  * load static files
  */
@@ -50,4 +54,6 @@ routes(app,passport);
 
 
 
-app.listen(3005 || process.env.PORT);
+app.listen(3000 || process.env.PORT,function(){
+	console.log('i am listenting');
+});

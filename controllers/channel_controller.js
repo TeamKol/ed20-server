@@ -6,13 +6,11 @@ module.exports={
     createChannel: function(req,res){
         const channel = model.channelServer;
         var newChannel = new channel();
+        newChannel.channelName = req.body.channelname;
+        newChannel.channelDescription = req.body.description;
+        newChannel.channelOwner.push({ownerId : req.session.user._id, ownerName: req.session.user.userName});
 
-        newChannel.channelName = req.body.channelName;
-        newChannel.slug = req.body.slug;
-        newChannel.channelDescription = req.body.channelDescription;
-        newChannel.author = 'durgakiran';
-
-        db.connection.connection();
+        db.connection.connection();//connection must be moved to server.js file
         db.insert.createNewChannel(newChannel);
 
 

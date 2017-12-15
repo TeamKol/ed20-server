@@ -1,2 +1,13 @@
 {{!-- Our first template with tokens --}}
 <h1>Hello, {{town}} </h1>
+{{#if user}}
+    <a class="btn btn-primary" href="/newblog">New Blog</a>
+{{/if}}
+<div class="blogs">
+    <h1>Content</h1>
+    {{#each data}}
+  <div><a href="/{{this._id}}">{{this.title}}</a></div>
+    {{else}}
+  <p class="empty">No content</p>
+    {{/each}}
+</div>

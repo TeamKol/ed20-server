@@ -4,22 +4,29 @@ const db = require('../db');
 
 module.exports={
     createBlog: function(req,res){
-        const blogServer = model.blogServer;
+        const blogServer = model.blog;
         var newBlogServer = new blogServer();
 
         newBlogServer.title = req.body.title;
-        newBlogServer.slug = req.body.slug;
+        
         newBlogServer.description = req.body.description;
         newBlogServer.content = req.body.content;
-        newBlogServer.author = 'durgakiran';
-        newBlogServer.likes = 0;
-        newBlogServer.comments = 0;
-        newBlogServer.views = 0;
-        newBlogServer.keywords = req.body.keywords;
-
-        db.connection.connection();
+        newBlogServer.author.push({authorId:req.session.user._id,authorName: req.session.user.userName});
+        newBlogServer.keywords.push({keyword: req.body.keywords});
         db.insert.createNewBlog(newBlogServer);
 
 
+    },
+    getblogs: function(req,res,cb){
+        let pageNumber = req.query.pagenumber || 0;
+        db.blog.getblogs(pageNumber,function(items){
+            cb(items);
+        });
+    },
+    getBlog: function(req,res,cb){
+        let blogId = req.params.blogId;
+        db.blog.getBlog(blogId,function(item){
+            cb(item);
+        });
     }
 }
