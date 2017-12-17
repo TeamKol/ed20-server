@@ -11,7 +11,7 @@ module.exports={
         
         newBlogServer.description = req.body.description;
         newBlogServer.content = req.body.content;
-        newBlogServer.author.push({authorId:req.session.user._id,authorName: req.session.user.userName});
+        newBlogServer.author.push({authorId:req.session.userId,authorName: 'durgakiran'});
         newBlogServer.keywords.push({keyword: req.body.keywords});
         db.insert.createNewBlog(newBlogServer);
 
