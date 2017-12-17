@@ -17,11 +17,25 @@ tinymce.init({
 	plugins: [
 		"advlist autolink link image lists charmap print preview hr anchor pagebreak",
 		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-		"save table contextmenu directionality emoticons template paste textcolor"
+		"save table contextmenu directionality emoticons template paste textcolor codesample code"
 	],
+	codesample_dialog_width: '400',
+	codesample_dialog_height: '400',
+	codesample_languages: [
+		  {text: 'HTML/XML', value: 'markup'},
+		  {text: 'JavaScript', value: 'javascript'},
+		  {text: 'CSS', value: 'css'},
+		  {text: 'PHP', value: 'php'},
+		  {text: 'Ruby', value: 'ruby'},
+		  {text: 'Python', value: 'python'},
+		  {text: 'Java', value: 'java'},
+		  {text: 'C', value: 'c'},
+		  {text: 'C#', value: 'csharp'},
+		  {text: 'C++', value: 'cpp'}
+	  ],
 
 	/* toolbar */
-	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | codesample code",
 	
 	/* style */
 	style_formats: [
