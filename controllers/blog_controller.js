@@ -23,10 +23,33 @@ module.exports={
             cb(items);
         });
     },
+    /**
+     * multiple dependency method check before change or delete
+     */
     getBlog: function(req,res,cb){
         let blogId = req.params.blogId;
         db.blog.getBlog(blogId,function(item){
             cb(item);
         });
+    },
+    updateblog: function(req,res,flag,cb){
+        let data = {};
+        if(flag == true){
+            data.publishflag = 'published';
+        }else{
+            data.publishflag = 'draft';
+        }
+        let blogId = req.params.blogId;
+        data.title = req.body.title;
+        data.description = req.body.description;
+        data.content = req.body.content;
+        data.keyword =  req.body.keywords;
+        db.blog.updateBlog(blogId,data,function(result){
+            if(result.modifiedCount == 1){
+                cb({result: true,blogId: blogId});
+            }else{
+                cb({result: false});
+            }
+        })
     }
 }

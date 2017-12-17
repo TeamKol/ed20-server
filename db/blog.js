@@ -16,5 +16,11 @@ module.exports = {
         
         
         
-    }
+    },
+    updateBlog: function(id,data,cb){
+        let o_id = mongoose.Types.ObjectId(id);
+        mongoose.connection.db.collection('blogs').updateOne({'_id':o_id},{$set:{"title":data.title,"description":data.description,"content":data.content, "publishflag":data.publishflag}}).then(function(result){
+            cb(result);
+        });
+    },
 }

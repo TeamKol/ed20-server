@@ -1,6 +1,10 @@
-{{userBlogs.[0]._id.[0]}}<br>
-{{#each userBlogs.[0].blogs}}
-{{this.title}}<br>
+{{#each userBlogs.blogs}}
+<div class="blog_thumbnail">
+<h1><a href="/{{this.id}}">{{this.title}}</a></h1>
+<a class="btn btn-default" href="/p/edit/{{this.id}}">Edit</a>
+<hr>
+{{this.description}}
+</div>
 {{else}}
  <p class="empty">No content</p>
     {{/each}}

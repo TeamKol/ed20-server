@@ -1,0 +1,30 @@
+
+<form method="post" action="/p/save/{{data._id}}" id="blogfrom">
+  <div class="form-group">
+    <label for="blogtitle">blog title</label>
+    <input type="text" class="form-control" id="blogtitle" name="title" placeholder="Enter blog title" value="{{data.title}}">
+  </div>
+  <div class="form-group">
+    <label for="description">description</label>
+    <input type="text" class="form-control" id="description" name="description" placeholder="Enter blog description" value="{{data.description}}">
+  </div>
+  <div class="form-group">
+    <label for="keywords">keywords</label>
+    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Enter blog description" value="{{data.keywords.[0].keyword}}">
+  </div>
+  <div class="form-group">
+    <label for="content">Content:</label>
+    <textarea class="tinymce" name="content" form="blogfrom">{{data.content}}</textarea>
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">save</button>
+  <button type="submit" class="btn btn-primary" formaction="/p/publishblog/{{data._id}}">publish</button>
+</form>
+
+
+
+
+
+<script  src="/plugins/tinymce/tinymce.min.js"></script>
+<script  src="/plugins/tinymce/init-tinymce.js"></script>

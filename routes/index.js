@@ -61,6 +61,33 @@ const middlewares = require('./middleware');
             res.render('viewblog',{user:true,data: item});
         });
     });
+    app.route('/p/edit/:blogId').get(middlewares.isLoggedIn,function(req,res){
+        controllers.blogController.getBlog(req,res,function(item) {
+            //console.log(JSON.stringify(item));
+            res.render('edit',{user:true,data: item});
+        });
+    });
+    app.route('/p/save/:blogId').post(middlewares.isLoggedIn,function(req,res){
+        controllers.blogController.updateblog(req,res,flag,function(result){
+            if(result.result){
+                res.redirect('/p/edit/'+result.blogId);
+            }else{
+                res.redirect('/view/dashboard');
+            }
+            
+        });
+    });
+    app.route('/p/publishblog/:blogId').post(middlewares.isLoggedIn,function(req,res){
+        let flag = true;
+        controllers.blogController.updateblog(req,res,flag,function(result){
+            if(result.result){
+                res.redirect('/p/edit/'+result.blogId);
+            }else{
+                res.redirect('/view/dashboard');
+            }
+            
+        });
+    })
 
     /**
      * dashboard
