@@ -23,4 +23,10 @@ module.exports = {
             cb(result);
         });
     },
+    deleteBlog: function(blogId,userId,cb){
+        let o_id = mongoose.Types.ObjectId(blogId);
+        mongoose.connection.db.collection('blogs').deleteOne({'_id':o_id,'author.authorId':userId}).then(function(result){
+            cb(result);
+        });
+    },
 }

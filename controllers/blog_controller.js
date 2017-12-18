@@ -51,5 +51,21 @@ module.exports={
                 cb({result: false});
             }
         })
+    },
+    deleteBlog: function(req,res){
+        let blogId = req.params.blogId;
+        let userId = req.session.userId;
+        if(blogId){
+            db.blog.deleteBlog(blogId,userId,function(result){
+                if(result.deletedCount===1){
+                    res.end('{"result": true}');
+                }else{
+                    res.end('{"result": false}');
+                }
+            });
+        }else{
+            res.redirect('/');
+        }
+        
     }
 }

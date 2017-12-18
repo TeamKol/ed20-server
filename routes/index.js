@@ -87,6 +87,9 @@ const middlewares = require('./middleware');
             }
             
         });
+    });
+    app.route('/p/delete/:blogId').delete(middlewares.isLoggedIn,function(req,res){
+        controllers.blogController.deleteBlog(req,res);
     })
 
     /**
