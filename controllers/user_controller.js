@@ -113,6 +113,7 @@ module.exports = function(passport) {
 
             // all is well, return successful user
             req.session.userId = user._id;
+            req.session.userName = user.userName
             return done(null, user);
         });
 
