@@ -99,5 +99,17 @@ const middlewares = require('./middleware');
         res.render('dashboard',{user: true,userBlogs: res.locals.userBlogs});
     });
 
+    
+    /*
+     Profile Page
+    */
+    app.route('/view/profile').get(middlewares.isLoggedIn,middlewares.getProfileData,function(req,res){
+        res.render('profile',{user: true, profileData: res.locals.profileData});
+    });
+
+    app.route('/update/profile').post(middlewares.isLoggedIn,function(req,res){
+        controllers.userDataController.updateProfileData(req,res);
+        res.redirect('/');
+    });
  }
  

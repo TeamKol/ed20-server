@@ -1,0 +1,21 @@
+<form method="post" action="/update/profile" id="profilefrom">
+  <div class="form-group">
+    <label for="username">UserName</label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" value="{{profileData.userName}}" disabled>
+  </div>
+  <div class="form-group">
+    <label for="email">Email Id</label>
+    <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{profileData.email}}" disabled>
+  </div>
+  <div class="form-group">
+    <label for="shortbio">Short Bio</label>
+    <input type="text" class="form-control" id="shortbio" name="shortbio" placeholder="Enter Short Bio" {{#if profileData.shortbio.length}}
+    value="{{profileData.shortbio}}"
+{{/if}} >
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
