@@ -40,7 +40,7 @@ module.exports = function (app, passport) {
     app.route('/create/channel').post(middlewares.isLoggedIn, function (req, res) {
         controllers.channelController.createChannel(req, res, function (result) {
             res.redirect(url.format({
-                pathname: "/mychannels",
+                pathname: "/view/dashboard",
                 query: result
             }));
         });
