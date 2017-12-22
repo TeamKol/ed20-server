@@ -7,7 +7,7 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const bodyParser = require('body-parser');
 const path = require('path');
-const flash    = require('connect-flash');
+const flash = require('connect-flash');
 const mongoose = require('mongoose');
 const app = express();
 
@@ -15,19 +15,32 @@ const app = express();
  * common error in setting view engine with handle bar
  * https://stackoverflow.com/questions/26454425/failed-to-lookup-view-in-directory-with-express-handlebars
  */
-app.engine('hbs', hbs({extname: '.hbs',defaultLayout: 'layout', layoutsDir: __dirname +'/views/layout/'}));
+app.engine('hbs', hbs({ extname: '.hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layout/' }));
 app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'hbs');
 
 
-mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true/* other options */});
-console.log(mongoose.connection.readyState);
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true/* other options */ });
+mongoose.connection.on('connected', function () {
+	console.log('Mongoose default connection open to ');
+});
+
+// If the connection throws an error
+mongoose.connection.on('error', function (err) {
+	console.log('Mongoose default connection error: ' + err);
+	throw err;
+});
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function () {
+	console.log('Mongoose default connection disconnected');
+});
 /**
  * load static files
  */
-app.use(express.static(path.join(__dirname,'/public/')));
+app.use(express.static(path.join(__dirname, '/public/')));
 
-require('./controllers/user_controller')(passport); 
+require('./controllers/user_controller')(passport);
 
 app.use(session({
 	secret: 'its a secret',
@@ -48,12 +61,12 @@ app.use(bodyParser.json());
  * importing routes
  */
 
-app.set('routes',require('./routes'));
-routes(app,passport);
+app.set('routes', require('./routes'));
+routes(app, passport);
 
 
 
 
-app.listen(3000 || process.env.PORT,function(){
+app.listen(3000 || process.env.PORT, function () {
 	console.log('i am listenting');
 });

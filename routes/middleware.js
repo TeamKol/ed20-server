@@ -24,7 +24,14 @@ const controllers = require('../controllers');
             res.locals.userBlogs = item;
             return next();
         });
-    }
+    },
+    getUserChannelData: function(req,res,next){
+        controllers.channelController.getUserChannelData(req,res,function(items){
+            console.log(items);
+            res.locals.channels = items;
+            return next();
+        });
+    },
 
  }
 

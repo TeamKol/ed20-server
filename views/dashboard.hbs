@@ -1,29 +1,45 @@
-{{#each userBlogs.blogs}}
-<div class="blog_thumbnail">
-<h1><a href="/{{this.id}}">{{this.title}}</a></h1>
-<a class="btn btn-default" href="/p/edit/{{this.id}}">Edit</a>
-<a class="btn btn-default"  style="color:red" onclick="deleteBlog('{{this.id}}')">Delete</a>
-<hr/>
-{{this.description}}
-</div>
-{{else}}
- <p class="empty">No content</p>
+<a class="btn btn-primary" href="/newchannel">New Channel</a>
+<div class="blogs">
+    <h3>My Blogs</h3>
+    {{#each userBlogs.blogs}}
+    <div class="blog_thumbnail">
+        <h1>
+            <a href="/{{this.id}}">{{this.title}}</a>
+        </h1>
+        <a class="btn btn-default" href="/p/edit/{{this.id}}">Edit</a>
+        <a class="btn btn-default" style="color:red" onclick="deleteBlog('{{this.id}}')">Delete</a>
+        <hr/> {{this.description}}
+    </div>
+    {{else}}
+    <p class="empty">No content</p>
     {{/each}}
-    <!--xml http request/ajax call to delete the -->
-    <script>
-        function deleteBlog(id){
-            alert('are you sure?');
-            let ourRequest = new XMLHttpRequest();
-            ourRequest.open('DELETE', '/p/delete/'+id, true);
-            ourRequest.send();
-            ourRequest.onload = function(){
-                ourData = JSON.parse(ourRequest.responseText);
-                console.log(ourData);
-                if(ourData.result){
-                    window.location.reload();
-                }else{
-                    alert('something went wrong');
-                }
+</div>
+<div class="channellist">
+    <h3>My Channels</h3>
+    {{#each channelData}}
+    <div>
+        <a href="/c/{{this._id}}">{{this.channelName}}</a>
+        <em>{{this.channelDescription}}</em>
+    </div>
+    {{else}}
+    <p>No Channels</p>
+    {{/each}}
+</div>
+<!--xml http request/ajax call to delete the blog-->
+<script>
+    function deleteBlog(id) {
+        alert('are you sure?');
+        let ourRequest = new XMLHttpRequest();
+        ourRequest.open('DELETE', '/p/delete/' + id, true);
+        ourRequest.send();
+        ourRequest.onload = function () {
+            ourData = JSON.parse(ourRequest.responseText);
+            console.log(ourData);
+            if (ourData.result) {
+                window.location.reload();
+            } else {
+                alert('something went wrong');
             }
         }
-    </script>
+    }
+</script>
