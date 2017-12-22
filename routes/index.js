@@ -106,5 +106,17 @@ module.exports = function (app, passport) {
     });
     app.route('/*').all(function (req, res) {
         res.render('error', {layuout: false});
+    }); 
+    /*
+     Profile Page
+    */
+    app.route('/view/profile').get(middlewares.isLoggedIn,middlewares.getProfileData,function(req,res){
+        res.render('profile',{user: true, profileData: res.locals.profileData});
     });
-}
+
+    app.route('/update/profile').post(middlewares.isLoggedIn,function(req,res){
+        controllers.userDataController.updateProfileData(req,res);
+        res.redirect('/');
+    });
+ }
+ 

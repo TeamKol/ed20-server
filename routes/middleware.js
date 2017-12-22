@@ -32,6 +32,14 @@ const controllers = require('../controllers');
             return next();
         });
     },
+    getProfileData: function getProfileData(req,res,next){
+        controllers.userDataController.getProfileData(req,res,function(item){
+            res.locals.profileData = item;
+            return next();
+        });
+        
+        
+    }
 
  }
 
