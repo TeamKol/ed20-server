@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, '/views/'));
 app.set('view engine', 'hbs');
 
 
-mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true/* other options */ });
+mongoose.connect('mongodb://durgakiran:durgakiran@ds141284.mlab.com:41284/voterapp', { useMongoClient: true/* other options */ });
 mongoose.connection.on('connected', function () {
 	console.log('Mongoose default connection open to ');
 });

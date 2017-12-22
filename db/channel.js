@@ -25,5 +25,12 @@ module.exports = {
                 cb(items);
             }
         });
-    }
+    },
+    getChannelById: function(ChannelId, cb){
+        let c_id = mongoose.Types.ObjectId(ChannelId);
+        mongoose.connection.db.collection('channels').findOne({'_id': c_id}).then(function(item){
+            console.log(item);
+            cb(item);
+        });
+    },
 }

@@ -39,6 +39,13 @@ const controllers = require('../controllers');
         });
         
         
+    },
+    getChannelById: function getChannelById(req,res,next){
+        controllers.channelController.getChannelById(req,res,function(item){
+            console.log(JSON.stringify(item));
+            res.locals.ChannelDataById = item;
+            return next();
+        });
     }
 
  }

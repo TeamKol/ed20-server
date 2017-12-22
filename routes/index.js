@@ -1,4 +1,4 @@
-/**
+ /**
  * routes of app
  */
 const controllers = require('../controllers');
@@ -32,7 +32,7 @@ module.exports = function (app, passport) {
     })
 
     /**
-     * get channel list page
+     *  channel
      */
     app.route('/newchannel').get(middlewares.isLoggedIn, function (req, res) {
         res.render('newChannel', { user: true });
@@ -45,7 +45,9 @@ module.exports = function (app, passport) {
             }));
         });
     });
-
+    app.route('/c/:channelid').get(middlewares.isLoggedIn,middlewares.getChannelById,function(req,res){
+        res.render('channel',{user: true, channelData: res.locals.ChannelDataById});
+    });
 
     /**
      * blog
@@ -99,13 +101,6 @@ module.exports = function (app, passport) {
      */
     app.route('/view/dashboard').get(middlewares.isLoggedIn, middlewares.getDashBoardData, middlewares.getUserChannelData, function (req, res) {
         res.render('dashboard', { user: true, userBlogs: res.locals.userBlogs, channelData: res.locals.channels, message: req.query.message });
-    });
-    app.route('/c/channel').get(function (req, res) {
-        console.log('here');
-        res.render('channel', { user: true });
-    });
-    app.route('/*').all(function (req, res) {
-        res.render('error', {layuout: false});
     }); 
     /*
      Profile Page
@@ -117,6 +112,12 @@ module.exports = function (app, passport) {
     app.route('/update/profile').post(middlewares.isLoggedIn,function(req,res){
         controllers.userDataController.updateProfileData(req,res);
         res.redirect('/');
+    });
+    /**
+     * always keep this req path last
+     */
+    app.route('/*').all(function (req, res) {
+        res.render('error', {layuout: false});
     });
  }
  

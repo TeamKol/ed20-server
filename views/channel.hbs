@@ -1,3 +1,8 @@
+<a class="btn btn-primary" href="/c/newblog">New Blog</a>
+{{#if channelData}}
+    <h3>{{channelData.channelName}}</h3>
+    <em>{{channelData.channelDescription}}</em>
+{{/if}}
 <form action="/c/uploadimage" method="post">
   <input type="file" name="pic" accept="image/*"> 
   <input type="submit">
