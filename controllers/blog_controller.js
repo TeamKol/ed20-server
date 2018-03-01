@@ -7,14 +7,29 @@ module.exports={
         const blogServer = model.blog;
         var newBlogServer = new blogServer();
 
-        newBlogServer.title = req.body.title;
         
+        console.log(req.body.parent);
+        if(req.body.parent=='individual' || req.body.parent=='channel'){
+            console.log(2);
+            if(req.body.parentId==req.session.userId){
+                newBlogServer.parent = {p_type: req.body.parent, p_typeId: req.body.parentId};
+            }else if(req.body.parent=='channel'){
+                newBlogServer.parent = {p_type: req.body.parent, p_typeId: req.body.parentId};
+            }
+            newBlogServer.title = req.body.title;
+        newBlogServer.accesFlag = req.body.accessFlag;
         newBlogServer.description = req.body.description;
         newBlogServer.content = req.body.content;
-        newBlogServer.author.push({authorId:req.session.userId,authorName: 'durgakiran'});
+        newBlogServer.author.push({authorId:req.session.userId,authorName: req.session.userName});
         newBlogServer.keywords.push({keyword: req.body.keywords});
         db.insert.createNewBlog(newBlogServer);
-
+        res.redirect('/');
+        
+        }else{
+            res.redirect('/')
+        }
+        
+        
 
     },
     getblogs: function(req,res,cb){
@@ -28,6 +43,7 @@ module.exports={
      */
     getBlog: function(req,res,cb){
         let blogId = req.params.blogId;
+        console.log(blogId);
         db.blog.getBlog(blogId,function(item){
             cb(item);
         });

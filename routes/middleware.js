@@ -26,9 +26,10 @@ const controllers = require('../controllers');
         });
     },
     getUserChannelData: function(req,res,next){
-        controllers.channelController.getUserChannelData(req,res,function(items){
+        controllers.channelController.getUserChannelData(req,res,function(items,blogItems){
             console.log(items);
             res.locals.channels = items;
+            res.locals.blogItems = blogItems;
             return next();
         });
     },
@@ -46,7 +47,16 @@ const controllers = require('../controllers');
             res.locals.ChannelDataById = item;
             return next();
         });
-    }
+    },
+    checkParent: function checkParent(req,res,next){
+        if(req.body.parent==='individual'&&req.body.parentId===req.session.userId){
+            console.log('succ');
+            return next();          
+        }else{
+            console.log('failed');
+            res.redirect('/');
+        }
+    },
 
  }
 

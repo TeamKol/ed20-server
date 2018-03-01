@@ -15,7 +15,11 @@ var comments = new Schema({
     test: {type: String},
     reaction: {type: String, enum: ['abuse','inappropriate']},
     upvotes: {type: Number,default: 0},
-})
+});
+var parent = new Schema({
+    p_type: {type: String, enum: ['individual', 'channel', 'series'], default: 'individual'},
+    p_typeId: {type: String, required: true}
+});
 
 
 
@@ -32,6 +36,7 @@ const blog = new Schema({
     views: {type: Number,default: 0},
     shares: {type: Number,default: 0},
     publishflag: {type: String, enum:['published','draft'], default: 'draft'},
+    parent: {type: parent, required: true}
    
 });
 

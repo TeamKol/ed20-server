@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
+
 const app = express();
 
 /**
@@ -56,6 +57,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+
+
+/*app.route('/c/uploadimage').post(upload.single('pic'),function(req,res){
+    
+                console.log(req.file);
+
+    res.end('done');
+});*/
 
 /**
  * importing routes

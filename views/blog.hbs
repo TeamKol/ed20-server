@@ -1,0 +1,31 @@
+<p>Author: {{author}}</p>
+<p>AccessFlag:{{data.accessFlag}}</p>
+<p>parent: {{data.parent}}</p>
+<form method="post" action="{{data.publishUrl}}" id="blogfrom">
+  <div class="form-group">
+    <label for="blogtitle">blog title</label>
+    <input type="text" class="form-control" id="blogtitle" name="title" placeholder="Enter blog title">
+  </div>
+  <div class="form-group">
+    <label for="description">description</label>
+    <input type="text" class="form-control" id="description" name="description" placeholder="Enter blog description">
+  </div>
+  <div class="form-group">
+    <label for="keywords">keywords</label>
+    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Enter blog description">
+  </div>
+  <div class="form-group">
+    <label for="content">Content:</label>
+    <textarea class="tinymce" name="content" form="blogfrom">Enter text here...</textarea>
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
+
+<script  src="/plugins/tinymce/tinymce.min.js"></script>
+<script  src="/plugins/tinymce/init-tinymce.js"></script>

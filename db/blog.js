@@ -6,9 +6,10 @@ module.exports = {
         });
     },
     getBlog: function(id,cb){
-        mongoose.connection.db.collection('blogs').findOne({'_id': id}).then(function(item){
+        let o_id = mongoose.Types.ObjectId(id+"");
+        mongoose.connection.db.collection('blogs').findOne({'_id': o_id}).then(function(item){
             cb(item);
-        })
+        });
         
         
         
@@ -29,4 +30,11 @@ module.exports = {
             cb(result);
         });
     },
+    getChannelBlogs: function(channelId,pageNumber,cb){
+        let c_Id = channelId + "";
+        mongoose.connection.db.collection('blogs').find({"parent.p_typeId": c_Id}).toArray(function(err,items){
+            if(err) throw err;
+            cb(items);
+        });
+    }
 }

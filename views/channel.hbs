@@ -1,8 +1,23 @@
-<a class="btn btn-primary" href="/c/newblog">New Blog</a>
+<a class="btn btn-primary" href="/c/{{channelData._id}}/newblog">New Blog</a>
 {{#if channelData}}
     <h3>{{channelData.channelName}}</h3>
     <em>{{channelData.channelDescription}}</em>
 {{/if}}
+<section>
+    <h3>My Blogs</h3>
+    {{#each blogItems}}
+    <div class="blog_thumbnail">
+        <h1>
+            <a href="/{{this._id}}">{{this.title}}</a>
+        </h1>
+        <a class="btn btn-default" href="/p/edit/{{this._id}}">Edit</a>
+        <a class="btn btn-default" style="color:red" onclick="deleteBlog('{{this._id}}')">Delete</a>
+        <hr/> {{this.description}}
+    </div>
+    {{else}}
+    <p class="empty">No content</p>
+    {{/each}}
+</section>
 <form action="/c/uploadimage" method="post">
   <input type="file" name="pic" accept="image/*"> 
   <input type="submit">

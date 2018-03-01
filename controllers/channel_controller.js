@@ -16,12 +16,17 @@ module.exports={
     },
     getUserChannelData: function(req,res,cb){
         db.channel.getUserChannelData(req.session.userId,function(items){
-            cb(items);
+            let channelId = items[0]._id;
+            console.log(channelId);
+            db.blog.getChannelBlogs(channelId,0,function(blogitems){
+                cb(items,blogitems);
+            });
         });
     },
     getChannelById: function(req,res,cb){
         let channelId = req.params.channelid;
         console.log(channelId);
+        channelId = ""+channelId;
         db.channel.getChannelById(channelId,function(item){
             cb(item);
         });

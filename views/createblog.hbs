@@ -1,5 +1,20 @@
-
-<form method="post" action="/create/blog" id="blogfrom">
+<p>Author: {{authorName}}</p>
+<form method="post" action={{submitUrl}} id="blogfrom">
+<div class="form-group">
+    <label for="accessFlag">Access Flag: </label>
+    <select id="accessFlag" class="form-control" name="accessFlag">
+    <option value="public">public</option>
+    <option value="private">private</option>
+    </select>
+  </div>
+<div class="form-group">
+    <label for="parent">parent:</label>
+    <input type="hidden" class="form-control" id="parent" name="parent" value="{{parent}}" >
+  </div>
+  <div class="form-group">
+    <label for="parentId">parentId:</label>
+    <input type="hidden" class="form-control" id="parentId" name="parentId" value="{{parentId}}" >
+  </div>
   <div class="form-group">
     <label for="blogtitle">blog title</label>
     <input type="text" class="form-control" id="blogtitle" name="title" placeholder="Enter blog title">

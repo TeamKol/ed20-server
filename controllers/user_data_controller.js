@@ -21,5 +21,10 @@ module.exports = {
         updateProfileData: function(req,res){
             let userId = req.session.userId;
             db.user.updateProfileData(req,res,userId);
+        },
+        getUserById: function(id,cb){
+            db.user.getProfileData(id, function(item){
+                cb(item);
+            });
         }
 }
