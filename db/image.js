@@ -6,17 +6,17 @@ var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
 
 module.exports = {
-    uploadImage: function(newImage){
-        newImage.save(function(err){
-            if(err) throw err;
-            mongoose.connection.db.collection('image').find({}).toArray(function(err,item){
-            if(err) throw err;
-            console.log(item);
-        })
+    uploadImage: function(newImage,cb){
+        console.log(newImage);
+        mongoose.connection.db.collection('image').insertOne(newImage).then(function(){
+            mongoose.connection.db.collection('image').find({}).toArray(function(err,item){console.log(item);});
+            cb('done')
         });
     },
     getImage: function(id,cb){
-        mongoose.connection.db.collection('image').find({"_id": id}).toArray(function(err,item){
+        let o_id = "5a97c9a9b5a49f188c222399";
+        let iId = mongoose.Types.ObjectId(o_id);
+        mongoose.connection.db.collection('image').find({"_id": iId}).toArray(function(err,item){
             if(err) throw err;
             cb(item);
         });
